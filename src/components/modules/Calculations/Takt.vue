@@ -1,7 +1,7 @@
 <template>
-  <q-layout class="layout-padding">
+  <div class="layout-padding">
     <h1>Text</h1>
-  </q-layout>
+  </div>
 </template>
 
 <script>

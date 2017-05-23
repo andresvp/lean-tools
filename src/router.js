@@ -1,12 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import App from './App.vue'
+import Error404 from './components/Error404.vue'
+import Index from './components/Index.vue'
+import Takt from './components/modules/Calculations/Takt.vue'
 
 Vue.use(VueRouter)
-
-function load (component) {
-  return () => System.import(`components/${component}.vue`)
-}
 
 export default new VueRouter({
     /*
@@ -22,8 +20,8 @@ export default new VueRouter({
      */
 
   routes: [
-        { path: '/', component: App }, // Default
-        { path: '/takt', component: load('Takt') }, // Takt time component
-        { path: '*', component: load('Error404') } // Not found
+        { path: '/', component: Index }, // Default
+        { path: '/takt', component: Takt }, // Takt time component
+        { path: '*', component: Error404 } // Not found
   ]
 })

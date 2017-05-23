@@ -1,20 +1,23 @@
 <template>
     <q-layout>
-        <app-Header></app-Header>
+        <app-header slot="header"></app-header>
+        <app-drawer></app-drawer>
         <router-view class="layout-view"></router-view>
     </q-layout>
 </template>
 
 <script>
-import Header from './Header.vue'
+import Header from './modules/Common/Header.vue'
+import Drawer from './modules/Common/Drawer.vue'
 
 export default {
   components: {
-    appHeader: Header
+    appHeader: Header,
+    appDrawer: Drawer
   }
 }
 </script>
 
-<style>
+<style lang="stylus">
 
 </style>

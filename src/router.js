@@ -19,9 +19,14 @@ export default new VueRouter({
      * build publicPath back to '' so Cordova builds work again.
      */
 
-  routes: [
-        { path: '/', component: Index }, // Default
-        { path: '/takt', component: Takt }, // Takt time component
-        { path: '*', component: Error404 } // Not found
+  routes: [{
+    path: '/',
+    component: Index,
+    children: [{
+      path: 'takt',
+      component: Takt
+    }]
+  },
+    { path: '*', component: Error404 } // Not found
   ]
 })

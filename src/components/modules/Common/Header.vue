@@ -5,7 +5,7 @@
             <i>menu</i>
           </button>
           <q-toolbar-title :padding="2">
-            Lean App Tools
+            <router-link class="white" to="/">Lean App Tools</router-link>
           </q-toolbar-title>
           <button>
             <i>mail</i>
@@ -27,5 +27,10 @@
 </script>
 
 <style lang="stylus">
-  
+  .white {
+    color: white
+  }
+  .white:hover {
+    color: white
+  }
 </style>

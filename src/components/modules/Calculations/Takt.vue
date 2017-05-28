@@ -2,7 +2,7 @@
   <div id="app-container">
     <div class="card">
       <div class="card-title bg-primary text-white text-center">
-        TAKT TIME
+        <h4>TAKT TIME</h4>
       </div>
       <div class="card-content card-force-top-padding text-center">
         <p class="no-margin">Your Demand:</p>

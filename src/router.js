@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Error404 from './components/Error404.vue'
+import Home from './components/Home.vue'
 import Index from './components/Index.vue'
 import Takt from './components/modules/Calculations/Takt.vue'
+import Oee from './components/modules/Calculations/Oee.vue'
 
 Vue.use(VueRouter)
 
@@ -22,10 +24,11 @@ export default new VueRouter({
   routes: [{
     path: '/',
     component: Index,
-    children: [{
-      path: 'takt',
-      component: Takt
-    }]
+    children: [
+        { path: '', component: Home },
+        { path: 'takt', component: Takt },
+        { path: 'oee', component: Oee }
+    ]
   },
     { path: '*', component: Error404 } // Not found
   ]

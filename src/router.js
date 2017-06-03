@@ -5,6 +5,7 @@ import Home from './components/Home.vue'
 import Index from './components/Index.vue'
 import Takt from './components/modules/Calculations/Takt.vue'
 import Oee from './components/modules/Calculations/Oee.vue'
+import Obc from './components/modules/Calculations/Obc.vue'
 
 Vue.use(VueRouter)
 
@@ -27,7 +28,8 @@ export default new VueRouter({
     children: [
         { path: '', component: Home },
         { path: 'takt', component: Takt },
-        { path: 'oee', component: Oee }
+        { path: 'oee', component: Oee },
+        { path: 'obc', component: Obc }
     ]
   },
     { path: '*', component: Error404 } // Not found

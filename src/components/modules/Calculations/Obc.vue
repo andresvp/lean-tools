@@ -20,109 +20,123 @@
         <h6>Now let's dive into OBC:</h6><br>
         <br>
         <div class="row">
-          <div class="col-lg-4 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
-            <label for="">Operator Description:</label><br>
-            <input v-model="opDesc" type="text" class="form-wd-2 text-center">
+          <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
           </div>
           <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
-            <label for="">Max Operator Cycle</label>
-            <input v-model="maxOpCycle" type="number" min="0" class="form-wd-2 text-center">
+            <label for=""># Operator or Process:</label><br>
+            <input class="padding-small text-center" v-model="processId" type="text">
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 text-center form-wd-2">
+            <label for="">Process Description</label><br>
+            <input v-model="processName" type="text" class="form-wd-2 text-center">
           </div>
           <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
-            <label for="">Min Operator Cycle</label>
-            <input v-model="minOpCycle" type="number" min="0" class="form-wd-2 text-center">
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
-            <label>Lowest Repeatable Cycle</label>
+            <label for="">Lowest Repeatable Cycle</label>
             <input v-model="lowRepCycle" type="number" min="0" class="form-wd-2 text-center">
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
-            <label for="">Average Cycle</label>
-            <input v-model="averageCycle" type="number" min="0" class="form-wd-2 text-center">
           </div>
         </div>
         <br>
         <div class="button-obc">
           <button class="primary round padding-btn" @click="addOperator">Add Operator</button>
-          <button class="primary round padding-btn" @click="generateChart">Generate Chart</button>
+          <button class="primary round padding-btn" @click="cleanData">Clean Data</button>
         </div>
         <div class="row">
-          <div class="col-lg-4 col-md-2 col-sm-4 col-xs-4 text-center form-wd-2">
-            <p>Desc</p>
+          <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center form-wd-2">
+            <p>#Operator or Process Number</p>
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 text-center form-wd-2">
+            <p>Process Description</p>
           </div>
           <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center form-wd-2">
-            <p>Max</p>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center form-wd-2">
-            <p>Min</p>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center form-wd-2">
-            <p>Low R</p>
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center form-wd-2">
-            <p>Average</p>
+            <p>Lowest Repeatable Cycle</p>
           </div>
         </div>
         <div class="list striped">
           <div class="item" v-for="item in obc">
             <div class="item-content row">
-              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center">
-                {{ item.name }}
+              <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center">
+                {{ item.processId }}
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 text-center">
+                {{ item.processName }}
               </div>
               <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
-                {{ item.maxOP }}
-              </div>
-              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
-                {{ item.minOP }}
-              </div>
-              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
-                {{ item.lowRep }}
-              </div>
-              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
-                {{ item.aveCycle }}
+                {{ item.lowRepCycle }}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="card">
+        <div class="card-title bg-primary text-white text-center">
+          <h5>OBC - Operator Balance Chart</h5>
+        </div>
+        <div class="card-content card-force-top-padding">
+          <div id="chart"></div>
+        </div>
+    </div>
   </div>
 </template>
 
 <script>
-
-import { Toast } from 'quasar'
+import c3 from 'c3'
+// import { Toast } from 'quasar'
 
 export default {
   data () {
     return {
-      takt: '',
-      oee: '',
-      opDesc: '',
-      maxOpCycle: '',
-      minOpCycle: '',
-      lowRepCycle: '',
-      averageCycle: '',
+      takt: 90,
+      oee: 80,
+      processId: 'Vigas',
+      processName: 'Acabamento',
+      lowRepCycle: 65,
       obc: [
-        { name: 'Operator 1', maxOP: 50, minOP: 35, lowRep: 46, aveCycle: 47 }
+        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Cortar', lowRepCycle: 65 },
+        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Dobrar', lowRepCycle: 65 }
       ]
     }
   },
   methods: {
     addOperator () {
       let newObc = {
-        name: this.opDesc, maxOP: this.maxOpCycle, minOP: this.minOpCycle, lowRep: this.lowRepCycle, aveCycle: this.averageCycle
+        takt: this.takt,
+        oee: this.oee,
+        processName: this.processName,
+        processId: this.processId,
+        lowRepCycle: this.lowRepCycle
       }
       this.obc.push(newObc)
-      this.opDesc = ''
-      this.maxOpCycle = ''
-      this.minOpCycle = ''
+      c3.generate({
+        bindto: '#chart',
+        data: {
+          json: this.obc,
+          keys: {
+            value: ['lowRepCycle', 'takt', 'oee']
+          },
+          type: 'bar',
+          types: {
+            takt: 'line',
+            oee: 'line'
+          },
+          groups: [
+            ['processId']
+          ]
+        }
+      })
+    },
+    cleanData () {
+      this.processId = ''
+      this.processName = ''
       this.lowRepCycle = ''
-      this.averageCycle = ''
-      Toast.create('New Operation Added')
     }
   }
 }
+
 </script>
 
 <style>

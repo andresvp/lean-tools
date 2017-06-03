@@ -9,8 +9,11 @@
                 <q-drawer-link icon="alarm" to="/takt">
                     Takt Time
                 </q-drawer-link>
-                <q-drawer-link icon="alarm" to="/oee">
+                <q-drawer-link icon="trending_up" to="/oee">
                     OEE - Eficiency
+                </q-drawer-link>
+                <q-drawer-link icon="insert_chart" to="/obc">
+                    Operator Balance Chart
                 </q-drawer-link>
             </div>
         </q-drawer>

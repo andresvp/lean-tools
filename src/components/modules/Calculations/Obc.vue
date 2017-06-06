@@ -20,18 +20,16 @@
         <h6>Now let's dive into OBC:</h6><br>
         <br>
         <div class="row">
-          <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center form-wd-2">
             <label for=""># Operator or Process:</label><br>
-            <input class="padding-small text-center" v-model="processId" type="text">
+            <input class="form-wd-2 text-center" v-model="processId" type="text">
           </div>
-          <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 text-center form-wd-2">
-            <label for="">Process Description</label><br>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center form-wd-2">
+            <label for="">Process Description:</label><br>
             <input v-model="processName" type="text" class="form-wd-2 text-center">
           </div>
-          <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
-            <label for="">Lowest Repeatable Cycle</label>
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center form-wd-2">
+            <label for="">Lowest Repeatable Cycle:</label>
             <input v-model="lowRepCycle" type="number" min="0" class="form-wd-2 text-center">
           </div>
         </div>
@@ -41,30 +39,26 @@
           <button class="primary round padding-btn" @click="cleanData">Clean Data</button>
         </div>
         <div class="row">
-          <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
-          </div>
-          <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center form-wd-2">
+          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center form-wd-2">
             <p>#Operator or Process Number</p>
           </div>
-          <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 text-center form-wd-2">
+          <div class="col-lg-6 col-md-6 col-sm-2 col-xs-2 text-center form-wd-2">
             <p>Process Description</p>
           </div>
-          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center form-wd-2">
+          <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2 text-center form-wd-2">
             <p>Lowest Repeatable Cycle</p>
           </div>
         </div>
         <div class="list striped">
           <div class="item" v-for="item in obc">
             <div class="item-content row">
-              <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6 text-center form-wd-2">
-              </div>
-              <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 text-center">
+              <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center">
                 {{ item.processId }}
               </div>
-              <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 text-center">
+              <div class="col-lg-6 col-md-6 col-sm-2 col-xs-2 text-center">
                 {{ item.processName }}
               </div>
-              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+              <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2 text-center">
                 {{ item.lowRepCycle }}
               </div>
             </div>
@@ -92,12 +86,14 @@ export default {
     return {
       takt: 90,
       oee: 80,
-      processId: 'Vigas',
+      processId: 'Operation 2',
       processName: 'Acabamento',
       lowRepCycle: 65,
       obc: [
-        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Cortar', lowRepCycle: 65 },
-        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Dobrar', lowRepCycle: 65 }
+        { takt: 90, oee: 80, processId: 'Operation 1', processName: 'Cortar', lowRepCycle: 65 },
+        { takt: 90, oee: 80, processId: 'Operation 1', processName: 'Dobrar', lowRepCycle: 35 },
+        { takt: 90, oee: 80, processId: 'Operation 2', processName: 'Dobrar', lowRepCycle: 65 },
+        { takt: 90, oee: 80, processId: 'Operation 2', processName: 'Dobrar', lowRepCycle: 35 }
       ]
     }
   },

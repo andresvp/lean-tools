@@ -69,8 +69,8 @@
         </div>
       </div>
     </div>
-    <button class="secondary round button-oee" v-show="!buttonReset" @click="calculateOee">Calculate OEE</button>
-    <button class="secondary round button-oee" v-show="buttonReset" @click="resetCalc">Reset Calculation</button>
+    <button class="primary round button-oee" v-show="!buttonReset" @click="calculateOee">Calculate OEE</button>
+    <button class="primary round button-oee" v-show="buttonReset" @click="resetCalc">Reset Calculation</button>
     <div class="card" v-show="showResult">
         <div class="card-title bg-primary text-white text-center">
           <h5>OEE - Result</h5>

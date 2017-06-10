@@ -39,26 +39,26 @@
           <button class="primary round padding-btn" @click="cleanData">Clean Data</button>
         </div>
         <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center form-wd-2">
-            <p>#Operator or Process Number</p>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center form-wd-2">
+            <p>#Process</p>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-2 col-xs-2 text-center form-wd-2">
-            <p>Process Description</p>
+          <div class="col-lg-6 col-md-6 col-sm-3 col-xs-3 text-center form-wd-2">
+            <p>Desc</p>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2 text-center form-wd-2">
-            <p>Lowest Repeatable Cycle</p>
+          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center form-wd-2">
+            <p>Lowest <br> Cycle</p>
           </div>
         </div>
         <div class="list striped">
           <div class="item" v-for="item in obc">
-            <div class="item-content row">
-              <div class="col-lg-3 col-md-3 col-sm-4 col-xs-4 text-center">
+            <div class="item-content row no-margin">
+              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
                 {{ item.processId }}
               </div>
-              <div class="col-lg-6 col-md-6 col-sm-2 col-xs-2 text-center">
+              <div class="col-lg-6 col-md-6 col-sm-3 col-xs-3 text-center">
                 {{ item.processName }}
               </div>
-              <div class="col-lg-3 col-md-3 col-sm-2 col-xs-2 text-center">
+              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                 {{ item.lowRepCycle }}
               </div>
             </div>
@@ -66,7 +66,7 @@
         </div>
       </div>
     </div>
-    <div class="card">
+    <div class="card" v-show="show">
         <div class="card-title bg-primary text-white text-center">
           <h5>OBC - Operator Balance Chart</h5>
         </div>
@@ -84,16 +84,17 @@ import c3 from 'c3'
 export default {
   data () {
     return {
+      show: false,
       takt: 90,
       oee: 80,
-      processId: 'Operation 2',
+      processId: 'Vigas',
       processName: 'Acabamento',
       lowRepCycle: 65,
       obc: [
-        { takt: 90, oee: 80, processId: 'Operation 1', processName: 'Cortar', lowRepCycle: 65 },
-        { takt: 90, oee: 80, processId: 'Operation 1', processName: 'Dobrar', lowRepCycle: 35 },
-        { takt: 90, oee: 80, processId: 'Operation 2', processName: 'Dobrar', lowRepCycle: 65 },
-        { takt: 90, oee: 80, processId: 'Operation 2', processName: 'Dobrar', lowRepCycle: 35 }
+        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Cortar', lowRepCycle: 43 },
+        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Dobrar', lowRepCycle: 35 },
+        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Montar', lowRepCycle: 55 },
+        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Soldar', lowRepCycle: 47 }
       ]
     }
   },
@@ -107,7 +108,18 @@ export default {
         lowRepCycle: this.lowRepCycle
       }
       this.obc.push(newObc)
+      this.chart()
+    },
+    cleanData () {
+      this.processId = ''
+      this.processName = ''
+      this.lowRepCycle = ''
+    },
+    chart () {
       c3.generate({
+        padding: {
+          right: 40
+        },
         bindto: '#chart',
         data: {
           json: this.obc,
@@ -118,17 +130,10 @@ export default {
           types: {
             takt: 'line',
             oee: 'line'
-          },
-          groups: [
-            ['processId']
-          ]
+          }
         }
       })
-    },
-    cleanData () {
-      this.processId = ''
-      this.processName = ''
-      this.lowRepCycle = ''
+      this.show = true
     }
   }
 }

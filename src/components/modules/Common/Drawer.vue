@@ -15,6 +15,9 @@
                 <q-drawer-link icon="insert_chart" to="/obc">
                     Operator Balance Chart
                 </q-drawer-link>
+                <q-drawer-link icon="multiline_chart" to="/pareto">
+                    Pareto Chart
+                </q-drawer-link>
             </div>
         </q-drawer>
 </template>

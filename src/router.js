@@ -6,6 +6,7 @@ import Index from './components/Index.vue'
 import Takt from './components/modules/Calculations/Takt.vue'
 import Oee from './components/modules/Calculations/Oee.vue'
 import Obc from './components/modules/Calculations/Obc.vue'
+import Pareto from './components/modules/Calculations/Pareto.vue'
 
 Vue.use(VueRouter)
 
@@ -29,7 +30,8 @@ export default new VueRouter({
         { path: '', component: Home },
         { path: 'takt', component: Takt },
         { path: 'oee', component: Oee },
-        { path: 'obc', component: Obc }
+        { path: 'obc', component: Obc },
+        { path: 'pareto', component: Pareto }
     ]
   },
     { path: '*', component: Error404 } // Not found

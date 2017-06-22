@@ -66,7 +66,7 @@
         </div>
       </div>
     </div>
-    <div class="card" v-show="show">
+    <div class="card" v-if="show">
         <div class="card-title bg-primary text-white text-center">
           <h5>OBC - Operator Balance Chart</h5>
         </div>
@@ -79,7 +79,6 @@
 
 <script>
 import c3 from 'c3'
-// import { Toast } from 'quasar'
 
 export default {
   data () {
@@ -91,9 +90,13 @@ export default {
       processName: 'Acabamento',
       lowRepCycle: 65,
       obc: [
-        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Cortar', lowRepCycle: 43 },
-        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Dobrar', lowRepCycle: 35 },
-        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Montar', lowRepCycle: 55 },
+        { takt: 90, oee: 80, processId: 'Almas', processName: 'Cortar', lowRepCycle: 43 },
+        { takt: 90, oee: 80, processId: 'Almas', processName: 'Dobrar', lowRepCycle: 35 },
+        { takt: 90, oee: 80, processId: 'Almas', processName: 'Montar', lowRepCycle: 55 },
+        { takt: 90, oee: 80, processId: 'Almas', processName: 'Soldar', lowRepCycle: 47 },
+        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Cortar', lowRepCycle: 47 },
+        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Dobrar', lowRepCycle: 47 },
+        { takt: 90, oee: 80, processId: 'Vigas', processName: 'Montar', lowRepCycle: 47 },
         { takt: 90, oee: 80, processId: 'Vigas', processName: 'Soldar', lowRepCycle: 47 }
       ]
     }

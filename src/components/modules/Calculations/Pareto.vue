@@ -9,11 +9,11 @@
         <div class="row">
           <div class="col-xm-6 col-sm-6 col-md-6 col-lg-6">
             <label>Problem Name: </label>
-            <input v-model="problem" type="text" class="prob-form">
+            <input v-model="problem" type="text" class="prob-form text-center">
           </div>
           <div class="col-xm-6 col-sm-6 col-md-6 col-lg-6">
             <label>Quantity: </label>
-            <input v-model="qtd" type="number" min="0" max="100" class="form-wd text-center">
+            <input v-model.number="qtd" type="number" min="0" max="100" class="form-wd text-center">
           </div>
         </div>
         <br>
@@ -21,33 +21,54 @@
           <button class="primary round padding-btn" @click="addProblem">Add Problem</button>
         </div>
       </div>
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center form-wd-2">
+          <p>Problem Description</p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 text-center form-wd-2">
+          <p>Quantity</p>
+        </div>
+      </div>
       <div class="list striped">
         <div class="item" v-for="item in paretoAr">
           <div class="item-content row no-margin">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-center">
               {{ item.problem }}
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-3 col-xs-3 text-center">
+            <div class="col-lg-4 col-md-4 col-sm-2 col-xs-2 text-center">
               {{ item.qtd }}
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="card">
+      <div class="card-title bg-primary text-white text-center">
+        <h5>Chart</h5>
+      </div>
+      <div class="card-content card-force-top-padding">
+        <div id="chart"></div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+
+import c3 from 'c3'
+import _ from 'lodash'
+
 export default {
   data () {
     return {
-      problem: '',
-      qtd: '',
+      problem: 'Falta de peça',
+      qtd: 20,
       paretoAr: [
-        { problem: 'Prob1', qtd: 12 },
-        { problem: 'Prob2', qtd: 15 },
-        { problem: 'Prob3', qtd: 16 }
-      ]
+        { problem: 'Falta de Fusão', qtd: 12 },
+        { problem: 'Erro de Montagem', qtd: 15 },
+        { problem: 'Escorrido', qtd: 16 }
+      ],
+      paretoArChart: []
     }
   },
   methods: {
@@ -57,6 +78,88 @@ export default {
         qtd: this.qtd
       }
       this.paretoAr.push(newPareto)
+      this.paretoAr = this.paretoAr.sort(this.compare)
+      this.paretoArChart = this.paretoCalculation(this.paretoAr)
+      this.chartData()
+    },
+    compare (a, b) {
+      if (a.qtd > b.qtd) {
+        return -1
+      }
+      if (a.qtd < b.qtd) {
+        return 1
+      }
+      return 0
+    },
+    chartData () {
+      c3.generate({
+        data: {
+          bindto: '#chart',
+          x: 'x',
+          columns: [
+            this.paretoArChart.finalPatternX,
+            this.paretoArChart.finalPatternQtd,
+            this.paretoArChart.finalPatternAcc
+          ],
+          type: 'bar',
+          types: {
+            '% Accumalated': 'line'
+          },
+          axes: {
+            '% Accumalated': 'y2'
+          }
+        },
+        axis: {
+          x: {
+            type: 'category'
+          },
+          y2: {
+            show: true
+          }
+        },
+        grid: {
+          y: {
+            lines: [
+              {value: 80, text: '80% of Problems', axis: 'y2'}
+            ]
+          }
+        }
+      })
+    },
+    paretoCalculation (paretoAr) {
+      function compare (a, b) {
+        if (a.qtd > b.qtd) {
+          return -1
+        }
+        if (a.qtd < b.qtd) {
+          return 1
+        }
+        return 0
+      }
+      const paretoArray = paretoAr.sort(compare)
+      const patternX = [
+          ['x']
+      ]
+      const patternQtd = [
+          ['Quantity']
+      ]
+      const patternAcc = [
+          ['% Accumalated']
+      ]
+      const patternXFinal = paretoArray.map(item => item.problem)
+      const patternQtdFinal = paretoArray.map(item => item.qtd)
+      const totalPercent = patternQtdFinal.reduce((acc, curr) => acc + curr)
+      const itemPercent = patternQtdFinal.map(item => Math.round((item / totalPercent) * 100))
+      const patternAccAlmost = itemPercent.reduce(function (r, c, i) { r.push((r[i - 1] || 0) + c); return r }, [])
+      const finalPatternAcc = _.flattenDeep(patternAcc.concat(patternAccAlmost))
+      const finalPatternX = _.flattenDeep(patternX.concat(patternXFinal))
+      const finalPatternQtd = _.flattenDeep(patternQtd.concat(patternQtdFinal))
+      console.log(finalPatternX)
+      return {
+        finalPatternX,
+        finalPatternQtd,
+        finalPatternAcc
+      }
     }
   }
 }

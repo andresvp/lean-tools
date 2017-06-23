@@ -18,7 +18,7 @@
         </div>
         <br>
         <div class="button-obc">
-          <button class="primary round padding-btn" @click="addProblem">Add Problem</button>
+          <button class="primary round padding-btn vertical-middle" @click="addProblem">Add Problem</button>
         </div>
       </div>
       <div class="row">
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <div class="card">
+    <div class="card" v-show="showChart">
       <div class="card-title bg-primary text-white text-center">
         <h5>Chart</h5>
       </div>
@@ -57,30 +57,41 @@
 
 import c3 from 'c3'
 import _ from 'lodash'
+import { Toast } from 'quasar'
 
 export default {
   data () {
     return {
-      problem: 'Falta de peça',
-      qtd: 20,
-      paretoAr: [
-        { problem: 'Falta de Fusão', qtd: 12 },
-        { problem: 'Erro de Montagem', qtd: 15 },
-        { problem: 'Escorrido', qtd: 16 }
-      ],
-      paretoArChart: []
+      problem: '',
+      qtd: null,
+      paretoAr: [],
+      paretoArChart: [],
+      showChart: false
     }
   },
   methods: {
     addProblem () {
-      let newPareto = {
-        problem: this.problem,
-        qtd: this.qtd
+      if (this.problem === '' || this.qtd === null) {
+        return Toast.create('Missing fields to complete!')
       }
-      this.paretoAr.push(newPareto)
-      this.paretoAr = this.paretoAr.sort(this.compare)
-      this.paretoArChart = this.paretoCalculation(this.paretoAr)
-      this.chartData()
+      this.showChart = true
+      let data = this.paretoAr
+      let index = data.map(function (d) { return d['problem'] }).indexOf(this.problem)
+      if (index === -1) {
+        let newPareto = {
+          problem: this.problem,
+          qtd: this.qtd
+        }
+        this.paretoAr.push(newPareto)
+        this.paretoAr = this.paretoAr.sort(this.compare)
+        this.paretoArChart = this.paretoCalculation(this.paretoAr)
+        this.chartData()
+        this.problem = null
+        this.qtd = null
+      }
+      else {
+        Toast.create('Data already registered, go to the next one!')
+      }
     },
     compare (a, b) {
       if (a.qtd > b.qtd) {
@@ -103,7 +114,7 @@ export default {
           ],
           type: 'bar',
           types: {
-            '% Accumalated': 'line'
+            '% Accumalated': 'spline'
           },
           axes: {
             '% Accumalated': 'y2'
@@ -154,7 +165,6 @@ export default {
       const finalPatternAcc = _.flattenDeep(patternAcc.concat(patternAccAlmost))
       const finalPatternX = _.flattenDeep(patternX.concat(patternXFinal))
       const finalPatternQtd = _.flattenDeep(patternQtd.concat(patternQtdFinal))
-      console.log(finalPatternX)
       return {
         finalPatternX,
         finalPatternQtd,
@@ -184,7 +194,7 @@ export default {
 .button-obc {
   display: table;
   margin: auto;
-  margin-bottom: 3em;
+  margin-bottom: 1em;
 }
 
 .padding-btn {
@@ -194,7 +204,7 @@ export default {
 @media screen and (max-width: 533px) {
   .padding-btn {
     display: table;
-    margin: 1em auto;
+    margin: 1em;
   }
 }
 </style>

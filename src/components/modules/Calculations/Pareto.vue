@@ -19,6 +19,7 @@
         <br>
         <div class="button-obc">
           <button class="primary round padding-btn vertical-middle" @click="addProblem">Add Problem</button>
+          <button class="primary round padding-btn vertical-middle" @click="cleanData" v-show="showChart">Reset Data</button>
         </div>
       </div>
       <div class="row">
@@ -70,6 +71,11 @@ export default {
     }
   },
   methods: {
+    cleanData () {
+      this.paretoAr = []
+      this.paretoArray = []
+      this.showChart = false
+    },
     addProblem () {
       if (this.problem === '' || this.qtd === null) {
         return Toast.create('Missing fields to complete!')

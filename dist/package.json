@@ -1,8 +1,8 @@
 {
- "name": "blog",
+ "name": "LeanTools",
  "version": "1.0.0",
- "description": "personalblog",
- "author": "Awesome Author",
+ "description": "AwesomeFuturePwaLeanApp",
+ "author": "Matheus Sandrini Rossi",
  "private": true,
  "scripts": {
    "postinstall": "npm install express"

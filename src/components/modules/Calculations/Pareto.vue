@@ -18,8 +18,8 @@
         </div>
         <br>
         <div class="button-obc">
-          <button class="primary round padding-btn vertical-middle" @click="addProblem">Add Problem</button>
-          <button class="primary round padding-btn vertical-middle" @click="cleanData" v-show="showChart">Reset Data</button>
+          <button class="primary round padding-btn" @click="addProblem">Add Item</button>
+          <button class="primary round padding-btn" @click="cleanData" v-show="showChart">Reset Data</button>
         </div>
       </div>
       <div class="row">
@@ -131,7 +131,9 @@ export default {
             type: 'category'
           },
           y2: {
-            show: true
+            show: true,
+            min: 10,
+            max: 100
           }
         },
         grid: {
@@ -204,13 +206,14 @@ export default {
 }
 
 .padding-btn {
-  margin: 0 1.5em;
+  margin: 0 1em;
 }
 
-@media screen and (max-width: 533px) {
+@media screen and (max-width: 429px) {
   .padding-btn {
-    display: table;
-    margin: 1em;
+    margin: auto;
+    margin-bottom: 1em;
+    display: table
   }
 }
 </style>

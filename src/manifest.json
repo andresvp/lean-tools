@@ -1,0 +1,102 @@
+{
+    "dir": "ltr",
+    "lang": "en",
+    "name": "Lean App Tools",
+    "scope": "/",
+    "display": "standalone",
+    "start_url": "https://matheus-lean.herokuapp.com/",
+    "short_name": "Lean App Tools",
+    "theme_color": "transparent",
+    "description": "Lean Tools Web App",
+    "orientation": "any",
+    "background_color": "transparent",
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "/img/da4a58a3-f1e7-fc62-362d-c9b8ee5ab3b1.webPlatform.png",
+            "sizes": "48x48",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/4e708891-ce36-6434-055e-960cc1816942.webPlatform.png",
+            "sizes": "1240x600",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/4afce3db-3e69-f37e-cf05-5f3c84f7157b.webPlatform.png",
+            "sizes": "300x300",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/03fc85bd-de4c-2d58-d44e-f11e8ee26048.webPlatform.png",
+            "sizes": "88x88",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/1cfeaf1b-aee0-c358-517f-84eb442adb43.webPlatform.png",
+            "sizes": "24x24",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/51bf3187-870b-2d28-e4a7-bb1ed457b6b1.webPlatform.png",
+            "sizes": "50x50",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/58f4ae4b-fb28-c6d8-0864-15c54135ae5b.webPlatform.png",
+            "sizes": "620x300",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/46aa4ef4-86b2-44db-1095-69ff4e04dfcc.webPlatform.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/ed7657ad-9d63-7aa8-8af9-72fab51c8cb1.webPlatform.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/9edbeb8c-176d-efe2-ac77-9c51f8146941.webPlatform.png",
+            "sizes": "96x96",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/cef25747-c43f-d311-0699-73743916fd64.webPlatform.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/9c4a5de4-56f4-390d-1881-b771cede433a.webPlatform.png",
+            "sizes": "36x36",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/0cffd412-6a07-e0bd-3a9f-28d793e2667d.webPlatform.png",
+            "sizes": "1024x1024",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/b48cad0c-90b0-829a-6cb4-eec38a20a7a9.webPlatform.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/91e46f52-d997-7368-1335-fc0c199b9b84.webPlatform.png",
+            "sizes": "152x152",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/e70c0435-d7f0-1673-55f7-1e6eb325005b.webPlatform.png",
+            "sizes": "120x120",
+            "type": "image/png"
+        },
+        {
+            "src": "/img/4bc33a32-fbee-1d88-ea41-6b688eedc442.webPlatform.png",
+            "sizes": "76x76",
+            "type": "image/png"
+        }
+    ]
+}

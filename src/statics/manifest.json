@@ -1,0 +1,15 @@
+{
+  "name": "Lean Web App Tools",
+  "short_name": "Lean Tools",
+  "icons": [
+    {
+      "src": "/statics/L.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#4DBA87"
+}

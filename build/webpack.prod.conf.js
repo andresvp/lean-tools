@@ -11,7 +11,7 @@ var
   SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin'),
   WebpackPwaManifest = require('webpack-pwa-manifest')
 
-  const PUBLIC_PATH = 'https://matheus-lean.herokuapp.com'
+  const PUBLIC_PATH = 'https://matheus-lean.herokuapp.com/'
 
 module.exports = merge(baseWebpackConfig, {
   module: {

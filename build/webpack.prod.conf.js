@@ -7,7 +7,11 @@ var
   baseWebpackConfig = require('./webpack.base.conf'),
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
-  OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+  OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin'),
+  SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin'),
+  WebpackPwaManifest = require('webpack-pwa-manifest')
+
+  const PUBLIC_PATH = 'https://matheus-lean.herokuapp.com'
 
 module.exports = merge(baseWebpackConfig, {
   module: {
@@ -18,6 +22,10 @@ module.exports = merge(baseWebpackConfig, {
     })
   },
   devtool: config.build.productionSourceMap ? '#source-map' : false,
+  output: {
+    // Snip
+    publicPath: PUBLIC_PATH
+  },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: config.build.productionSourceMap,
@@ -70,6 +78,32 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       chunks: ['vendor']
+    }),
+    new SWPrecacheWebpackPlugin(
+      {
+        cacheId: 'my-domain-cache-id',
+        dontCacheBustUrlsMatching: /\.\w{8}\./,
+        filename: 'service-worker.js',
+        minify: true,
+        navigateFallback: PUBLIC_PATH + 'index.html',
+        staticFileGlobsIgnorePatterns: [/\.map$/, /manifest\.json$/]
+      }
+    ),
+    new WebpackPwaManifest({
+      name: 'My Applications Friendly Name',
+      short_name: 'Application',
+      description: 'Description!',
+      background_color: '#01579b',
+      theme_color: '#01579b',
+      'theme-color': '#01579b',
+      start_url: '/',
+      icons: [
+        {
+          src: path.resolve('src/statics/L.png'),
+          sizes: [512],
+          destination: path.join('assets', 'icons')
+        }
+      ]
     })
   ]
 })

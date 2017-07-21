@@ -9,9 +9,10 @@ var
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin'),
   SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin'),
-  WebpackPwaManifest = require('webpack-pwa-manifest')
+  WebpackPwaManifest = require('webpack-pwa-manifest'),
+  CompressionPlugin = require("compression-webpack-plugin")
 
-  const PUBLIC_PATH = 'https://matheus-lean.herokuapp.com/'
+const PUBLIC_PATH = 'https://matheus-lean.herokuapp.com/'
 
 module.exports = merge(baseWebpackConfig, {
   module: {
@@ -79,6 +80,7 @@ module.exports = merge(baseWebpackConfig, {
       name: 'manifest',
       chunks: ['vendor']
     }),
+    // generate pre-cache files to use pwa off-line
     new SWPrecacheWebpackPlugin(
       {
         cacheId: 'my-domain-cache-id',
@@ -89,9 +91,10 @@ module.exports = merge(baseWebpackConfig, {
         staticFileGlobsIgnorePatterns: [/\.map$/, /manifest\.json$/]
       }
     ),
+    // generate Manifest automaticaly
     new WebpackPwaManifest({
-      name: 'My Applications Friendly Name',
-      short_name: 'Application',
+      name: 'Lean Tools Web App',
+      short_name: 'Lean Tools',
       description: 'Description!',
       background_color: '#01579b',
       theme_color: '#01579b',
@@ -104,6 +107,13 @@ module.exports = merge(baseWebpackConfig, {
           destination: path.join('assets', 'icons')
         }
       ]
+    }),
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8
     })
   ]
 })

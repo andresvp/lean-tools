@@ -1,15 +1,20 @@
 {
-  "name": "Lean Web App Tools",
-  "short_name": "Lean Tools",
+  "name": "Quasar App",
+  "short_name": "Quasar-PWA",
   "icons": [
     {
-      "src": "/statics/L.png",
+      "src": "/statics/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/statics/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
   ],
-  "start_url": "/",
+  "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#FFFFFF",
+  "background_color": "#ffffff",
   "theme_color": "#027be3"
 }

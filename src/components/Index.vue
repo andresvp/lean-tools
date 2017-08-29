@@ -1,23 +1,45 @@
 <template>
-    <q-layout>
-        <app-header slot="header"></app-header>
-        <app-drawer></app-drawer>
-        <router-view class="layout-view"></router-view>
-    </q-layout>
+  <q-layout
+    ref="layout"
+    view="lHh Lpr fff"
+    :left-class="{'bg-grey-2': true}"
+  >
+    <Toolbar slot="header"></Toolbar>
+    <Drawer slot="left"></Drawer>
+    <!--
+      Replace following <div> with
+      <router-view /> component
+      if using subRoutes
+    -->
+    <router-view class="layout-view"></router-view>
+  </q-layout>
 </template>
 
 <script>
-import Header from './modules/Common/Header.vue'
-import Drawer from './modules/Common/Drawer.vue'
+import {
+  QLayout,
+  Events
+} from 'quasar'
+
+import Toolbar from './common/Toolbar.vue'
+import Drawer from './common/Drawer.vue'
 
 export default {
+  name: 'index',
   components: {
-    appHeader: Header,
-    appDrawer: Drawer
+    QLayout,
+    Toolbar,
+    Drawer,
+    Events
+  },
+  mounted () {
+    Events.$on('openDrawer', () => {
+      this.$refs.layout.toggleLeft()
+    })
   }
 }
 </script>
 
-<style lang="stylus">
+<style>
 
 </style>

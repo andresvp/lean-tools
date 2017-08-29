@@ -8,11 +8,9 @@ var
   ExtractTextPlugin = require('extract-text-webpack-plugin'),
   HtmlWebpackPlugin = require('html-webpack-plugin'),
   OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin'),
+  CopyWebpackPlugin = require('copy-webpack-plugin'),
   SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin'),
-  WebpackPwaManifest = require('webpack-pwa-manifest'),
-  CompressionPlugin = require("compression-webpack-plugin")
-
-const PUBLIC_PATH = 'https://matheus-lean.herokuapp.com/'
+  fsUtils = require('./fs-utils')
 
 module.exports = merge(baseWebpackConfig, {
   module: {
@@ -23,10 +21,6 @@ module.exports = merge(baseWebpackConfig, {
     })
   },
   devtool: config.build.productionSourceMap ? '#source-map' : false,
-  output: {
-    // Snip
-    publicPath: PUBLIC_PATH
-  },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: config.build.productionSourceMap,
@@ -47,7 +41,7 @@ module.exports = merge(baseWebpackConfig, {
       filename: '[name].[contenthash].css'
     }),
     new HtmlWebpackPlugin({
-      filename: config.build.index,
+      filename: path.resolve(__dirname, '../dist/index.html'),
       template: 'src/index.html',
       inject: true,
       minify: {
@@ -58,7 +52,9 @@ module.exports = merge(baseWebpackConfig, {
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
+      chunksSortMode: 'dependency',
+      serviceWorkerLoader: `<script>${fsUtils.loadMinified(path.join(__dirname,
+        './service-worker-prod.js'))}</script>`
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({
@@ -68,9 +64,12 @@ module.exports = merge(baseWebpackConfig, {
         return (
           module.resource &&
           /\.js$/.test(module.resource) &&
-          module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
-          ) === 0
+          (
+            module.resource.indexOf('quasar') > -1 ||
+            module.resource.indexOf(
+              path.join(__dirname, '../node_modules')
+            ) === 0
+          )
         )
       }
     }),
@@ -80,40 +79,21 @@ module.exports = merge(baseWebpackConfig, {
       name: 'manifest',
       chunks: ['vendor']
     }),
-    // generate pre-cache files to use pwa off-line
-    new SWPrecacheWebpackPlugin(
+    // copy custom static assets
+    new CopyWebpackPlugin([
       {
-        cacheId: 'my-domain-cache-id',
-        dontCacheBustUrlsMatching: /\.\w{8}\./,
-        filename: 'service-worker.js',
-        minify: true,
-        navigateFallback: PUBLIC_PATH + 'index.html',
-        staticFileGlobsIgnorePatterns: [/\.map$/, /manifest\.json$/]
+        from: path.resolve(__dirname, '../src/statics'),
+        to: 'statics',
+        ignore: ['.*']
       }
-    ),
-    // generate Manifest automaticaly
-    new WebpackPwaManifest({
-      name: 'Lean Tools Web App',
-      short_name: 'Lean Tools',
-      description: 'Description!',
-      background_color: '#01579b',
-      theme_color: '#01579b',
-      'theme-color': '#01579b',
-      start_url: '/',
-      icons: [
-        {
-          src: path.resolve('src/statics/L.png'),
-          sizes: [512],
-          destination: path.join('assets', 'icons')
-        }
-      ]
-    }),
-    new CompressionPlugin({
-      asset: "[path].gz[query]",
-      algorithm: "gzip",
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8
+    ]),
+    // service worker caching
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'my-quasar-app',
+      filename: 'service-worker.js',
+      staticFileGlobs: ['dist/**/*.{js,html,css,woff,svg}'],
+      minify: true,
+      stripPrefix: 'dist/'
     })
   ]
 })

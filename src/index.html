@@ -1,56 +1,40 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Quasar PWA App</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= htmlWebpackPlugin.files.publicPath %>statics/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= htmlWebpackPlugin.files.publicPath %>statics/icons/favicon-16x16.png">
+    <link rel="manifest" href="<%= htmlWebpackPlugin.files.publicPath %>statics/manifest.json">
 
     <!-- Add to home screen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="{{ name }}">
-    <link rel="apple-touch-icon" href="/static/img/icons/apple-touch-icon-152x152.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-title" content="Quasar App">
+    <link rel="apple-touch-icon" href="<%= htmlWebpackPlugin.files.publicPath %>statics/icons/apple-icon-152x152.png">
     <!-- Add to home screen for Windows -->
-    <meta name="msapplication-TileImage" content="/static/img/icons/msapplication-icon-144x144.png">
-    <meta name="msapplication-TileColor" content="#000000">
+    <meta name="msapplication-TileImage" content="<%= htmlWebpackPlugin.files.publicPath %>statics/icons/ms-icon-144x144.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+
+    <meta name="theme-color" content="#027be3">
+
     <% for (var chunk of webpack.chunks) {
         for (var file of chunk.files) {
           if (file.match(/\.(js|css)$/)) { %>
     <link rel="<%= chunk.initial?'preload':'prefetch' %>" href="<%= htmlWebpackPlugin.files.publicPath + file %>" as="<%= file.match(/\.css$/)?'style':'script' %>"><% }}} %>
-
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <link href="/statics/c3.css" rel="stylesheet" type="text/css">
-    <link href="/statics/flexboxgrid.min.css" rel="stylesheet" type="text/css">
-    <title>Lean App Tools</title>
-    <link rel="shortcut icon" type="image/x-icon" href="statics/favicon.ico">
-    <link rel="manifest" href="/statics/manifest.json">
-    <meta name="theme-color" content="#027be3">
-    <script>
-        if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-            navigator.serviceWorker.register('./service-worker.js').then(function(registration) {
-            // Registration was successful
-            console.log('ServiceWorker registration successful with scope: ', registration.scope)
-            }).catch(function(err) {
-            // registration failed :(
-            console.log('ServiceWorker registration failed: ', err)
-            })
-        })
-        }
-    </script>
+  </head>
+  <body>
     <noscript>
-        <h1>Sorry, We can't run this app in thi device!</h1>
-        <h2>Try a modern one</h2>
+      This is your fallback content in case JavaScript fails to load.
     </noscript>
-
-</head>
-
-<body>
     <div id="q-app"></div>
+    <!-- Todo: only include in production -->
+    <%= htmlWebpackPlugin.options.serviceWorkerLoader %>
     <!-- built files will be auto injected -->
-</body>
-
+  </body>
 </html>

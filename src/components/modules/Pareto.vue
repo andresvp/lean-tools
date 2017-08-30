@@ -187,7 +187,7 @@ export default {
             }
           }
         })
-      }, 10)
+      }, 50)
     },
     paretoCalculation (paretoAr) {
       function compare (a, b) {

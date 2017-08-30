@@ -1,8 +1,8 @@
 {
- "name": "LeanWebAppTools",
+ "name": "blog",
  "version": "1.0.0",
- "description": "LeanTools",
- "author": "Matheus Sandrini Rossi",
+ "description": "personalblog",
+ "author": "Awesome Author",
  "private": true,
  "scripts": {
   "postinstall": "npm install express"

@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div class="container">
     <img id="logo" src="~assets/main-logo.png" alt="Lean App Tools" class="responsive">
+
   </div>
 </template>
 
@@ -11,10 +12,14 @@ export default {
 </script>
 
 <style>
-#logo {
-  padding-top: 5%;
-  width: 80%;
-  margin: 0 auto;
-  display: table;
+.container {
+  padding: 2%;
 }
+
+#logo {
+  padding-top: 25vh;
+  display: table;
+  margin: auto;
+}
+
 </style>

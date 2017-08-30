@@ -32,7 +32,8 @@ export default new VueRouter({
     children: [
       { path: '', component: load('Home') },
       { path: '/home', component: load('Home') },
-      { path: '/takt', component: loadPages('Takt') }
+      { path: '/takt', component: loadPages('Takt') },
+      { path: '/pareto', component: loadPages('Pareto') }
     ]
   },
     // Always leave this last one

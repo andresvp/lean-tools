@@ -1,8 +1,8 @@
 <template>
   <div id="app-container">
     <q-card>
-      <q-card-title class="card-title bg-primary text-white text-center">
-        <h5>TAKT TIME</h5>
+      <q-card-title class="card-title bg-primary text-white text-center no-margin">
+        <h5 class="no-margin">TAKT TIME</h5>
       </q-card-title> 
       <q-card-main class="card-wid">
         <br>
@@ -68,8 +68,9 @@ export default {
 </script>
 
 <style>
+
 #app-container {
-  padding: 0.5em;
+  padding: 0.20em;
 }
 
 .size-result {

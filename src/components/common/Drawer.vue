@@ -18,7 +18,7 @@
       </q-side-link>
       <q-side-link item to="/pareto">
         <q-item-side icon="message" />
-        <q-item-main label="Pareto" sublabel="" />
+        <q-item-main label="Pareto" sublabel="80 / 20 Chart" />
       </q-side-link>
     </q-list>
   </div>

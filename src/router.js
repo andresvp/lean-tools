@@ -33,7 +33,9 @@ export default new VueRouter({
       { path: '', component: load('Home') },
       { path: '/home', component: load('Home') },
       { path: '/takt', component: loadPages('Takt') },
-      { path: '/pareto', component: loadPages('Pareto') }
+      { path: '/pareto', component: loadPages('Pareto') },
+      { path: '/oee', component: loadPages('Oee') },
+      { path: '/obc', component: loadPages('Obc') }
     ]
   },
     // Always leave this last one

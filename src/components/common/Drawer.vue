@@ -13,12 +13,20 @@
         <q-item-main label="Home" sublabel="General Information" />
       </q-side-link>
       <q-side-link item to="/takt">
-        <q-item-side icon="school" />
+        <q-item-side icon="alarm" />
         <q-item-main label="Takt Time" sublabel="Simple Takt Calc" />
       </q-side-link>
+      <q-side-link item to="/oee">
+        <q-item-side icon="show_chart" />
+        <q-item-main label="OEE" sublabel="Overall Equipment Effectiveness" />
+      </q-side-link>
       <q-side-link item to="/pareto">
-        <q-item-side icon="message" />
+        <q-item-side icon="insert_chart" />
         <q-item-main label="Pareto" sublabel="80 / 20 Chart" />
+      </q-side-link>
+      <q-side-link item to="/obc">
+        <q-item-side icon="multiline_chart" />
+        <q-item-main label="OBC" sublabel="[WIP] Work In Progress" />
       </q-side-link>
     </q-list>
   </div>

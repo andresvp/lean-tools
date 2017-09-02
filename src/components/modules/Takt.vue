@@ -41,8 +41,8 @@ export default {
   },
   data () {
     return {
-      demand: '',
-      avaliableTime: '',
+      demand: 8,
+      avaliableTime: 560,
       result: 0,
       showReset: false
     }
@@ -53,7 +53,7 @@ export default {
         return Toast.create('Please, insert some data!')
       }
       let takt = Math.floor(this.avaliableTime / this.demand)
-      this.result = `${takt} minutes`
+      this.result = `Your takt time is ${takt} minutes`
       this.showReset = true
     },
     resetParams () {
@@ -63,6 +63,9 @@ export default {
       this.showReset = false
       this.$refs.focus.focus()
     }
+  },
+  created () {
+    this.calculateTakt() // just here for demo, remove in production
   }
 }
 </script>
@@ -86,7 +89,7 @@ export default {
   .card-wid {
     width: 100%;
     margin: 0 auto;
-}
+  }
 }
 
 </style>

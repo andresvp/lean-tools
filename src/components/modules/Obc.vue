@@ -4,76 +4,73 @@
       <q-card-title class="bg-primary text-white text-center">
         <h5 class="no-margin" >OBC - Operator Balance Chart</h5>
       </q-card-title>
-      <div class="card-content card-force-top-padding">
-        <h6>Enter the Following information:</h6><br>
+      <q-card-main>
+        <h6>Enter the Following information:</h6>
         <div class="row">
-          <div class="col-xm-6 col-sm-6 col-md-6 col-lg-6 form-wd-2 text-center">
-            <label>Takt Time: </label>
-            <input v-model="takt" type="number" min="0"class="form-wd text-center">
+          <div class="col-6">
+            <q-input v-model.number="takt" class="margin-min" type="number" :min="0" float-label="Takt Time" />
           </div>
-          <div class="col-xm-6 col-sm-6 col-md-6 col-lg-6 form-wd-2 text-center">
-            <label>OEE (%): </label>
-            <input v-model="oee" type="number" min="0" max="100" class="form-wd text-center">
+          <div class="col-6">
+            <q-input v-model.number="oee" class="margin-min" type="number" :min="0" :max="100" float-label="OEE" />
           </div>
         </div>
         <br>
-        <h6>Now let's dive into OBC:</h6><br>
-        <br>
+        <h6>Now let's dive into OBC:</h6>
         <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center form-wd-2">
-            <label for=""># Operator or Process:</label><br>
-            <input class="form-wd-2 text-center" v-model="processId" type="text">
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <q-input class="margin-min" v-model="processId" type="text" float-label="Operator Nº or Process"/>
           </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 text-center form-wd-2">
-            <label for="">Process Description:</label><br>
-            <input v-model="processName" type="text" class="form-wd-2 text-center">
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <q-input v-model="processName" type="text" class="margin-min" float-label="Process Descrition" />
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 text-center form-wd-2">
-            <label for="">Lowest Repeatable Cycle:</label>
-            <input v-model="lowRepCycle" type="number" min="0" class="form-wd-2 text-center">
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <q-input v-model.number="lowRepCycle" type="number" :min="0" class="margin-min" float-label="Lowest Repeatable Cycle" />
           </div>
         </div>
         <br>
         <div class="button-obc">
-          <button class="primary round padding-btn" @click="addOperator">Add Operator</button>
-          <button class="primary round padding-btn" @click="cleanData">Clean Data</button>
+          <q-btn color="primary" class="round padding-btn" @click="addOperator">Add Operator</q-btn>
+          <q-btn color="primary" class="round padding-btn" @click="cleanData">Clean Data</q-btn>
         </div>
-        <div class="row">
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center form-wd-2">
-            <p>#Process</p>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-3 col-xs-3 text-center form-wd-2">
-            <p>Desc</p>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center form-wd-2">
-            <p>Lowest <br> Cycle</p>
-          </div>
-        </div>
-        <div class="list striped">
-          <div class="item" v-for="item in obc">
-            <div class="item-content row no-margin">
-              <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
-                {{ item.processId }}
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-3 col-xs-3 text-center">
-                {{ item.processName }}
-              </div>
-              <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
-                {{ item.lowRepCycle }}
-              </div>
+      </q-card-main>
+    </q-card>
+    <q-card>
+      <q-card-title class="card-title bg-primary text-white text-center">
+        <h5 class="no-margin">Chart</h5>
+      </q-card-title>
+        <q-card-main>
+          <q-card-separator class="separator-pad" />
+            <div id="chart"></div>
+          <div class="row uppercase text-bold table-header">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
+              <p class="no-margin">#Process</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-3 col-xs-3 text-center">
+              <p class="no-margin">Desc</p>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+              <p class="no-margin">Lowest Cycle</p>
             </div>
           </div>
-        </div>
-      </div>
-    </q-card>
-    <div class="card" v-if="show">
-        <div class="card-title bg-primary text-white text-center">
-          <h5>OBC - Operator Balance Chart</h5>
-        </div>
-        <div class="card-content card-force-top-padding">
-          <div id="chart"></div>
-        </div>
-    </div>
+          <q-list striped-odd no-border>
+            <q-item v-for="item in obc" :key="item.obc">
+              <q-item-main>
+                <div class="item-content row no-margin">
+                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 text-center">
+                    {{ item.processId }}
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-3 col-xs-3 text-center">
+                    {{ item.processName }}
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                    {{ item.lowRepCycle }}
+                  </div>
+                </div>
+              </q-item-main>
+            </q-item>
+          </q-list>
+        </q-card-main>
+    </q-card>  
   </div>
 </template>
 
@@ -87,7 +84,10 @@ import {
   QCardMain,
   QCardSeparator,
   QInput,
-  QBtn
+  QBtn,
+  QList,
+  QItem,
+  QItemMain
 } from 'quasar'
 
 export default {
@@ -99,7 +99,10 @@ export default {
     QCardMain,
     QCardSeparator,
     QInput,
-    QBtn
+    QBtn,
+    QList,
+    QItem,
+    QItemMain
   },
   data () {
     return {
@@ -121,6 +124,9 @@ export default {
       ]
     }
   },
+  mounted () {
+    this.addOperator()
+  },
   methods: {
     addOperator () {
       let newObc = {
@@ -140,9 +146,6 @@ export default {
     },
     chart () {
       c3.generate({
-        padding: {
-          right: 40
-        },
         bindto: '#chart',
         data: {
           json: this.obc,
@@ -163,8 +166,19 @@ export default {
 </script>
 
 <style>
+
+@import url("../../../node_modules/c3/c3.css");
+
 #app-container {
   padding: 0.25em;
+}
+
+.margin-min {
+  margin: 1em;
+}
+
+.separator-pad {
+  margin: 1%;
 }
 
 </style>

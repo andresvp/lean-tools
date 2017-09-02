@@ -6,14 +6,14 @@
       </q-card-title> 
       <q-card-main class="card-wid">
         <br>
-        <q-input type="number" v-model="demand" autofocus float-label="Your Demand Here" ref="focus"/>
+        <q-input class="margin-min" type="number" v-model="demand" autofocus float-label="Your Demand Here" ref="focus"/>
         <br>
-        <q-input float-label="Avaliable Time do Produce (min)" type="number" v-model="avaliableTime" />
+        <q-input class="margin-min" float-label="Avaliable Time do Produce (min)" type="number" v-model="avaliableTime" />
         <br><br>
         <q-btn color="primary" v-show="!showReset" @click="calculateTakt">Calculate</q-btn>
         <q-btn color="primary" v-show="showReset" @click="resetParams">Reset Calculation</q-btn>
         <br><br>
-        <q-input v-show="result != 0" class="text-center" id="size-result" readonly v-model="result" />
+        <q-input v-show="result != 0" class="margin-min" id="size-result" readonly v-model="result" />
       </q-card-main>
     </q-card>
   </div>  
@@ -83,6 +83,10 @@ export default {
 .card-wid {
   width: 50%;
   margin: 0 auto;
+}
+
+.margin-min {
+  margin: 1em;
 }
 
 @media screen and (max-width: 425px){

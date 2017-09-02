@@ -9,16 +9,16 @@
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
             <h5 class="" >Avaliable Rate</h5>
             <div class="row">
-              <q-input type="number" float-label="Total Avaliable Time" v-model.number="avaliableTime" :min="0" />
+              <q-input type="number" float-label="Total Avaliable Time" class="margin-min" v-model.number="avaliableTime" :min="0" />
             </div>            
             <div class="row">
                <div class="width-1of2">
-                <q-input type="number" v-model.number="plannedTime" float-label="Brakes, 5S, Meetings" :min="0" />
+                <q-input type="number" v-model.number="plannedTime" class="margin-min" float-label="Brakes, 5S, Meetings" :min="0" />
               </div>
             </div>
             <div class="row">
                <div class="width-1of2">
-                <q-input type="number" v-model.number="downTime" class="form-wd text-center" :min="0" float-label="Changeovers, Breakdowns, lack of components"/>
+                <q-input type="number" v-model.number="downTime" class="margin-min" :min="0" float-label="Changeovers, Breakdowns, lack of components"/>
               </div>
             </div>
           </div>
@@ -26,12 +26,12 @@
             <h5>Performance Rate</h5>
             <div class="row">
                <div class="width-1of2">
-                <q-input type="number" v-model.number="processCycleTime"  :min="0" float-label="Process Cycle Time"/>
+                <q-input type="number" class="margin-min" v-model.number="processCycleTime"  :min="0" float-label="Process Cycle Time"/>
               </div>
             </div>
             <div class="row">
               <div class="width-1of2">
-                <q-input type="number" v-model.number="totalProduced" :min="0" float-label="Total Produced Parts" />
+                <q-input type="number" class="margin-min" v-model.number="totalProduced" :min="0" float-label="Total Produced Parts" />
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
             <h5>Quality Rate</h5>
             <div class="row">
               <div class="width-1of2">
-                <q-input type="number" v-model.number="defectiveParts" class="form-wd text-center" ::min="0" float-label="Number of Defective Parts"/>
+                <q-input type="number" v-model.number="defectiveParts" class="margin-min" ::min="0" float-label="Number of Defective Parts"/>
               </div>
             </div>
           </div>
@@ -168,6 +168,10 @@ h5 {
 
 .pad-top {
   margin-top: 0.5em;
+}
+
+.margin-min {
+  margin: 1em;
 }
 
 </style>

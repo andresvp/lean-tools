@@ -8,11 +8,11 @@
         <h6 class="pad-h6">Enter the Following information:</h6>
         <div class="row">
           <div class="col-xm-8 col-sm-8 col-md-8 col-lg-8">
-            <q-input v-model="problem" type="text" ref="inputone" float-label="Description of your problem"/>
+            <q-input class="margin-min" v-model="problem" type="text" ref="inputone" float-label="Description of your problem"/>
           </div>
           <div class="col-xm-4 col-sm-4 col-md-4 col-lg-4">
             <div class="wid-qtd">
-              <q-input v-model.number="qtd" type="number" float-label="Quantity" />
+              <q-input class="margin-min" v-model.number="qtd" type="number" float-label="Quantity" />
             </div>
           </div>
         </div>
@@ -96,7 +96,7 @@ export default {
       showChart: false
     }
   },
-  created () {
+  mounted () {
     this.paretoAr = [
       { problem: 'Problem 1', qtd: 50 },
       { problem: 'Problem 2', qtd: 450 },
@@ -251,6 +251,10 @@ export default {
 .pad-h6 {
   padding-top: 1%;
   margin-bottom: 0;
+}
+
+.margin-min {
+  margin: 1em;
 }
 
 @media screen and (max-width: 575px){

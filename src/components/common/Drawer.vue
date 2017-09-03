@@ -26,7 +26,7 @@
       </q-side-link>
       <q-side-link item to="/obc">
         <q-item-side icon="multiline_chart" />
-        <q-item-main label="OBC" sublabel="[WIP] Work In Progress" />
+        <q-item-main label="OBC" sublabel="Operator Balance Chart" />
       </q-side-link>
     </q-list>
   </div>

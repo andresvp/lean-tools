@@ -28,6 +28,10 @@
         <q-item-side icon="multiline_chart" />
         <q-item-main label="OBC" sublabel="Operator Balance Chart" />
       </q-side-link>
+      <q-side-link item to="/kanban">
+        <q-item-side icon="list" />
+        <q-item-main label="Kanban" sublabel="Suport Just In Time" />
+      </q-side-link>
     </q-list>
   </div>
 </template>

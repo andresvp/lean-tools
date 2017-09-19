@@ -35,7 +35,8 @@ export default new VueRouter({
       { path: '/takt', component: loadPages('Takt') },
       { path: '/pareto', component: loadPages('Pareto') },
       { path: '/oee', component: loadPages('Oee') },
-      { path: '/obc', component: loadPages('Obc') }
+      { path: '/obc', component: loadPages('Obc') },
+      { path: '/kanban', component: loadPages('Kanban') }
     ]
   },
     // Always leave this last one

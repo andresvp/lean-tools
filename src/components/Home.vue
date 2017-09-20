@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <img id="logo" src="~assets/main-logo.png" alt="Lean App Tools" class="responsive">
-
   </div>
 </template>
 

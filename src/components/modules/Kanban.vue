@@ -98,13 +98,13 @@ export default {
         { partCod: 2003040, partDesc: 'Brakes', partQtd: 200 }
       ],
       redParts: [
-        { partCod: 2003042, partDesc: 'Chain Guard', partQtd: 10 },
-        { partCod: 2003042, partDesc: 'Chain Guard', partQtd: 10 },
+        { partCod: 2003042, partDesc: 'Chain Guard X', partQtd: 10 },
+        { partCod: 2003042, partDesc: 'Chain Guard Y', partQtd: 10 },
         { partCod: 2003041, partDesc: 'Tires', partQtd: 15 },
-        { partCod: 2003040, partDesc: 'Horn', partQtd: 20 },
-        { partCod: 2003043, partDesc: 'Mirror', partQtd: 25 },
-        { partCod: 2003043, partDesc: 'Mirror', partQtd: 25 },
-        { partCod: 2003040, partDesc: 'Horn', partQtd: 50 },
+        { partCod: 2003040, partDesc: 'Horn X', partQtd: 20 },
+        { partCod: 2003043, partDesc: 'Mirror Left', partQtd: 25 },
+        { partCod: 2003043, partDesc: 'Mirror Right', partQtd: 25 },
+        { partCod: 2003040, partDesc: 'Horn y', partQtd: 50 },
         { partCod: 2003041, partDesc: 'Tires', partQtd: 50 }
       ]
     }

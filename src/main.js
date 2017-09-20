@@ -14,6 +14,7 @@ import 'quasar-extras/material-icons'
 import Vue from 'vue'
 import Quasar from 'quasar'
 import router from './router'
+import { store } from './store/store'
 
 Vue.config.productionTip = false
 Vue.use(Quasar) // Install Quasar Framework
@@ -30,5 +31,6 @@ if (__THEME === 'mat') {
 new Vue({
   el: '#q-app',
   router,
+  store,
   render: h => h(require('./App'))
 })

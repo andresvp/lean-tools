@@ -6,7 +6,12 @@
     internal vue-router navigation
   -->  
     <q-list no-border link inset-delimiter>
-      <div class="row flex-center bg-white" style="width: 100%; height: 110px;"><img src="~assets/L.png" style="height: 75px;"> <div style="margin-left: 15px;">Lean Tools</div></div>
+      <div class="row flex-center bg-white" style="width: 100%; height: 110px;">
+        <img src="~assets/L.png" style="height: 75px;">
+        <div style="margin-left: 15px;">
+          Lean Tools
+        </div>
+      </div>
       <q-list-header>Essential Links</q-list-header>
       <q-side-link item to="/home">
         <q-item-side icon="home" />

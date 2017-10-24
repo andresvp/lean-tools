@@ -190,16 +190,7 @@ export default {
       }, 50)
     },
     paretoCalculation (paretoAr) {
-      function compare (a, b) {
-        if (a.qtd > b.qtd) {
-          return -1
-        }
-        if (a.qtd < b.qtd) {
-          return 1
-        }
-        return 0
-      }
-      const paretoArray = paretoAr.sort(compare)
+      const paretoArray = paretoAr.sort(this.compare)
       const patternX = [
         ['x']
       ]

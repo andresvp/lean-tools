@@ -10,6 +10,7 @@
        Lean Web App Tools
        <div slot="subtitle">Tools to Improve your Lean Thinking</div>
      </q-toolbar-title>
+    <q-btn flat @click="logout()">Logout</q-btn>
    </q-toolbar>
 </template>
 
@@ -35,6 +36,9 @@ export default {
   methods: {
     openDrawer () {
       Events.$emit('openDrawer', true)
+    },
+    logout () {
+      this.$store.dispatch('logout')
     }
   }
 }

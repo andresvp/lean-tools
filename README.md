@@ -1,6 +1,6 @@
-# Lean Tools App - Progressive Web App
+# Quasar PWA App
 
-> A Quasar PWA projects
+> A Quasar PWA project
 
 ## Build Setup
 

@@ -14,7 +14,7 @@ import 'quasar-extras/material-icons'
 import Vue from 'vue'
 import Quasar from 'quasar'
 import router from './router'
-import { store } from './store/store'
+import { store } from './store/store.js'
 
 Vue.config.productionTip = false
 Vue.use(Quasar) // Install Quasar Framework

@@ -51,14 +51,15 @@ export default {
   },
   methods: {
     login () {
-      this.$store.dispatch('login', {
-        email: this.email,
-        password: this.password
-      }).then(() => {
-        this.$router.push('/app')
-      }).catch((error) => {
-        console.log(error)
-      })
+      // this.$store.dispatch('login', {
+      //   email: this.email,
+      //   password: this.password
+      // }).then(() => {
+      //   this.$router.push('/app')
+      // }).catch((error) => {
+      //   console.log(error)
+      // })
+      this.$router.push('/app')
     }
   },
   computed: {

@@ -38,6 +38,7 @@ export default {
       Events.$emit('openDrawer', true)
     },
     logout () {
+      this.$router.push({ name: 'login' })
       this.$store.dispatch('logout')
     }
   }

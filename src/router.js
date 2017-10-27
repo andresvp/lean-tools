@@ -13,16 +13,13 @@ function loadPages (component) {
   return () => System.import(`@/modules/${component}.vue`)
 }
 
-export default new VueRouter({
+const router = new VueRouter({
   routes: [{
-    path: '/login',
-    component: load('Login')
-  },
-  {
-    path: '/app',
+    path: '/login', component: load('Login'), name: 'login' },
+  { path: '/app',
     component: load('Index'),
     children: [
-      { path: '', component: load('Home') },
+      { path: '', component: load('Home'), name: 'app' },
       { path: '/home', component: load('Home') },
       { path: '/takt', component: loadPages('Takt') },
       { path: '/pareto', component: loadPages('Pareto') },
@@ -31,7 +28,22 @@ export default new VueRouter({
       { path: '/kanban', component: loadPages('Kanban') }
     ]
   },
-    // Always leave this last one
   { path: '*', component: load('Error404') } // Not found
   ]
 })
+
+// router.beforeEach((to, from, next) => {
+//   if (to.path !== '/login') {
+//     let token = localStorage.getItem('token')
+//     if (token) {
+//       next()
+//     }
+//     else {
+//       this.$router.push({ name: 'login' })
+//       next()
+//     }
+//   }
+//   next()
+// })
+
+export default router

@@ -28,6 +28,7 @@ const router = new VueRouter({
       { path: '/kanban', component: loadPages('Kanban') }
     ]
   },
+  { path: '/', redirect: { name: 'login' } },
   { path: '*', component: load('Error404') } // Not found
   ]
 })

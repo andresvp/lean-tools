@@ -36,6 +36,9 @@ export default {
     Events.$on('openDrawer', () => {
       this.$refs.layout.toggleLeft()
     })
+  },
+  beforeDestroy () {
+    Events.$off('openDrawer')
   }
 }
 </script>

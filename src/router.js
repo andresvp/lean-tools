@@ -9,7 +9,7 @@ function load (component) {
 }
 
 function loadPages (component) {
-  // '@' is aliased to src/components
+  // '@' is aliased to src/components/modules
   return () => System.import(`@/modules/${component}.vue`)
 }
 
@@ -20,12 +20,12 @@ const router = new VueRouter({
     component: load('Index'),
     children: [
       { path: '', component: load('Home'), name: 'app' },
-      { path: '/home', component: load('Home') },
-      { path: '/takt', component: loadPages('Takt') },
-      { path: '/pareto', component: loadPages('Pareto') },
-      { path: '/oee', component: loadPages('Oee') },
-      { path: '/obc', component: loadPages('Obc') },
-      { path: '/kanban', component: loadPages('Kanban') }
+      { path: 'home', component: load('Home') },
+      { path: 'takt', component: loadPages('Takt') },
+      { path: 'pareto', component: loadPages('Pareto') },
+      { path: 'oee', component: loadPages('Oee') },
+      { path: 'obc', component: loadPages('Obc') },
+      { path: 'kanban', component: loadPages('Kanban') }
     ]
   },
   { path: '/', redirect: { name: 'login' } },

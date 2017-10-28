@@ -35,10 +35,10 @@ export default {
   },
   methods: {
     openDrawer () {
-      Events.$emit('openDrawer', true)
+      Events.$emit('openDrawer')
     },
     logout () {
-      this.$router.push({ name: 'login' })
+      this.$router.push('/')
       this.$store.dispatch('logout')
     }
   }
